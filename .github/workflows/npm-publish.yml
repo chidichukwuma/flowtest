@@ -15,10 +15,8 @@ jobs:
     strategy:
       matrix:
         node:
-          - 10
-          - 12
           - 14
-          - 16
+          
     steps:
       - uses: actions/setup-node@v1
         with:
@@ -32,6 +30,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-v${{ matrix.node }}-
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm audit fix
+          npm install
       - name: Run All Node.js Tests
         run: npm run test
