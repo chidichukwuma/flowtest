@@ -7,77 +7,31 @@ on:
     branches: [ "dev" ]
   push:
     branches: [ "dev" ]
+
 jobs:
-  build:
+  test:
+    name: 'Node.js v${{ matrix.node }}'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    strategy:
+      matrix:
+        node:
+          - 10
+          - 12
+          - 14
+          - 16
     steps:
-      - uses: actions/checkout@v3
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm test
-      # - run: npm ci
-      # - run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-# name: Publish Node.js Package
-
-# on:
-#   pull_request:
-#     branches: [ dev ]
-#   push:
-#     branches: [ dev ]
-# jobs:
-#   run-test:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Use Node.js
-#       uses: actions/setup-node@v2
-#       with: 
-#         node-version: "14"
-
-#     - name: Install dependencies
-#       run: npm install
-
-#     - name: Run test
-#       run: npm test
-#     # steps:
-#     #   - uses: actions/checkout@v2
-#     #   - uses: actions/setup-node@v1
-#     #     with:
-#     #       node-version: 12
-#     #   - run: npm ci
-
-#   publish-npm:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#           registry-url: https://registry.npmjs.org/
-#       - run: npm ci
-#       - run: npm publish
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
-#   publish-gpr:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#           registry-url: https://npm.pkg.github.com/
-#       - run: npm ci
-#       - run: npm publish
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          node-version: '${{ matrix.node }}'
+      - uses: actions/checkout@v2
+      - name: 'Cache node_modules'
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-v${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-v${{ matrix.node }}-
+      - name: Install Dependencies
+        run: npm install
+      - name: Run All Node.js Tests
+        run: npm run test
