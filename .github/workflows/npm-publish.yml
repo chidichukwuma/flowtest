@@ -36,10 +36,10 @@ jobs:
           npm audit fix
           npm install
       - name: Run All Node.js Tests
+        env: 
+          public_key: ${{ secret.PUBLIC_KEY }}
+          secret_key: ${{ secret.SECRET_KEY }}
         run: npm run test
-        with: 
-          env: 
-           public_key = ${{ secret.PUBLIC_KEY }}
-           secret_key = ${{ secret.SECRET_KEY }}
+
 
        
