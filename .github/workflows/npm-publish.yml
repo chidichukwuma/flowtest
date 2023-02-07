@@ -36,12 +36,6 @@ jobs:
           npm audit fix
           npm install
 
-      - name: Run All Node.js Tests
-        env: 
-          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        run: npm run test
-
       - name: code coverage
         env: 
           PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
