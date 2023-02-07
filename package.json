@@ -14,8 +14,8 @@
     "check-coverage": true,
     "functions": 50,
     "lines": 50,
-    "report-dir": "./report",
-    "reporter": "html"
+    "report-dir": "./coverage",
+    "reporter": ["lcov", "html"]
   },
   "keywords": [],
   "author": "Flutterwave Developers",
