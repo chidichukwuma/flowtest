@@ -1,13 +1,14 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Publish Package to npmjs
+name: Review package
 on:
-  pull_request:
-    branches: [ "dev" ]
   push:
-    branches: [ "dev" ]
-
+      branches: [ "dev" ]
+  pull_request:
+    types:
+      - opened
+   
 jobs:
   test:
     name: 'Node.js v${{ matrix.node }}'
@@ -24,6 +25,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'Cache node_modules'
         uses: actions/cache@v2
+      
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-v${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
@@ -35,3 +37,9 @@ jobs:
           npm install
       - name: Run All Node.js Tests
         run: npm run test
+        with: 
+          env: 
+           public_key = ${{ secret.PUBLIC_KEY }}
+           secret_key = ${{ secret.SECRET_KEY }}
+
+       
