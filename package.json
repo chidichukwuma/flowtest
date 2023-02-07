@@ -14,7 +14,7 @@
     "check-coverage": true,
     "functions": 50,
     "lines": 50,
-    "report-dir": "https://drive.google.com/drive/folders/1gxERUOJE8RHY8pW9NvlPMxib9YsQ6OYG?usp=share_link",
+    "report-dir": "./report",
     "reporter": "html"
   },
   "keywords": [],
