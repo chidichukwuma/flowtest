@@ -63,7 +63,6 @@ on: release
 jobs:
   test:
     name: Check for changes in .md files
-    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -72,6 +71,8 @@ jobs:
           PATTERNS: |
             +(documentation)/*.md
             *.md
+          FILES: |
+            CHANGELOG.md
       - name: Check for git diff in source code
         # run only if there are differences in the .md code else skip or terminate
         run: echo ${{ env.GIT_DIFF }}
