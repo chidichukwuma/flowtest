@@ -81,10 +81,7 @@ jobs:
           # FILES: |
           #   README.md
       # - run: echo ${{ env.GIT_DIFF }}
-      - name: Check code style
+      - name: Check for code changes
         # Check only if there are differences in the source code
         run: echo ${{ env.GIT_DIFF }}
         if: env.GIT_DIFF
-
-
-       
