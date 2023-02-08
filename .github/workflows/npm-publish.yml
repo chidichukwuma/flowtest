@@ -80,8 +80,11 @@ jobs:
             *.md
           # FILES: |
           #   README.md
-      - run: echo ${{ env.GIT_DIFF }}
-
+      # - run: echo ${{ env.GIT_DIFF }}
+      - name: Check code style
+        # Check only if there are differences in the source code
+        run: npm lint
+        if: env.GIT_DIFF
 
 
        
