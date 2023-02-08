@@ -56,19 +56,13 @@
 #           - 14
 
   
-name: Review package
-on:
-  release:
-    types: [ "published" ]
-  push:
-      branches: [ "dev" ]
-  pull_request:
-    types:
-      - opened
+name: Review package changes
+on: release
+
    
 jobs:
   test:
-    name: 'Node.js v${{ matrix.node }}'
+    name: Check for changes in .md files
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
@@ -78,10 +72,7 @@ jobs:
           PATTERNS: |
             +(documentation)/*.md
             *.md
-          # FILES: |
-          #   README.md
-      # - run: echo ${{ env.GIT_DIFF }}
-      - name: Check for code changes
-        # Check only if there are differences in the source code
+      - name: Check for git diff in source code
+        # run only if there are differences in the .md code else skip or terminate
         run: echo ${{ env.GIT_DIFF }}
-        if: env.GIT_DIFF
+        if: env.GIT_DIFF 
