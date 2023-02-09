@@ -57,7 +57,7 @@
 
   
 name: Review package changes
-on: release
+on: push
 
 jobs:
   test:
