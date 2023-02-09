@@ -76,5 +76,5 @@ jobs:
             CHANGELOG.md
       - name: Check for git diff in source code
         # run only if there are differences in the .md code else skip or terminate
-        run: echo ${{ env.GIT_DIFF }}
-        if: env.GIT_DIFF 
+        run: exit 1
+        if: env.GIT_DIFF == ""
