@@ -3220,6 +3220,6 @@ const validateOTP = async () => {
 
 validateOTP();
 
-  
+
 ```
 
