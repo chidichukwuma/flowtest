@@ -11,7 +11,7 @@
 
 
 ### How to use
-
+### How to use
 `npm install flutterwave-node-v3`
 
 
