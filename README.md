@@ -14,7 +14,7 @@
 ### How to use ---
 `npm install flutterwave-node-v3`
 
-
+ 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
 
