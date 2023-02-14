@@ -15,7 +15,7 @@
 `npm install flutterwave-node-v3`
 
 
-```javascript 
+```javascript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY);
@@ -3220,6 +3220,6 @@ const validateOTP = async () => {
 
 validateOTP();
 
-
+  
 ```
 
