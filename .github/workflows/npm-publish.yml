@@ -77,7 +77,9 @@ jobs:
             CHANGELOG.md
       - name: Check for README.md or Doc is updated else exit 
         # run only if there are differences in the .md code else skip or terminate
-        if: (env.GIT_DIFF == '')
+        # if: (env.GIT_DIFF == '' )
+        if: contains('["README.md","documentation/*.md"]', env.GIT_DIFF)
+       
         run: |
          echo Update documentation files or README.md before push
          exit 1 
